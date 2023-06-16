@@ -683,7 +683,7 @@ RoomSubjectEvent | RoomSubject | 聊天室主题变更 |
 ## 开发Chalk插件
 ### Chalk架构设计
 
-<img src="./chalk_architecture.png" width="800"/>
+![](https://cdn.jsdelivr.net/gh/XDongger/dongger_s_img_repo/images/chalk_architecture.png")
 
 Chalk的架构设计将系统分为两部分。
 
