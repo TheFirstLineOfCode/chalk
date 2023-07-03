@@ -577,32 +577,32 @@ public class ChatServices implements IChatServices, IErrorListener, IStanzaListe
 				if (chatClient.getState() == State.CONNECTED && !stopFlag) {
 					taskThreadPool.execute(createTaskTriggerThread(task));
 				} else {
-					new Thread(new AlwaysTimeoutTaskRunnable(task)).start();
+					new Thread(new AlwaysTimedOutTaskRunnable(task)).start();
 				}
 			}
 			
 		}
 		
-		private class AlwaysTimeoutTaskRunnable<Y extends Stanza> implements Runnable {
+		private class AlwaysTimedOutTaskRunnable<Y extends Stanza> implements Runnable {
 			private ITask<Y> task;
 			
-			public AlwaysTimeoutTaskRunnable(ITask<Y> task) {
+			public AlwaysTimedOutTaskRunnable(ITask<Y> task) {
 				this.task = task;
 			}
 			
 			@Override
 			public void run() {
 				try {					
-					task.trigger(new AlwaysTimeoutStream<>(task));
+					task.trigger(new AlwaysTimedOutStream<>(task));
 				} catch (RuntimeException e) {
 					processException(e);
 				}
 			}
 			
-			private class AlwaysTimeoutStream<Z extends Stanza> implements IUnidirectionalStream<Z> {
+			private class AlwaysTimedOutStream<Z extends Stanza> implements IUnidirectionalStream<Z> {
 				private ITask<Z> task;
 				
-				public AlwaysTimeoutStream(ITask<Z> task) {
+				public AlwaysTimedOutStream(ITask<Z> task) {
 					this.task = task;
 				}
 				
@@ -617,7 +617,7 @@ public class ChatServices implements IChatServices, IErrorListener, IStanzaListe
 
 						@Override
 						public void run() {
-							task.processTimeout(AlwaysTimeoutStream.this, stanza);
+							task.processTimeout(AlwaysTimedOutStream.this, stanza);
 						}
 						
 					}, timeout);

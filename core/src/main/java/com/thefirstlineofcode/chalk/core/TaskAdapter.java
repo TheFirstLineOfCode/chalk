@@ -11,7 +11,7 @@ public abstract class TaskAdapter<T extends Stanza> implements ITask<T> {
 	}
 
 	@Override
-	public boolean processTimeout(IUnidirectionalStream<T> stream, T stanza) {
+	public boolean processTimeout(IUnidirectionalStream<T> stream, T request) {
 		return false;
 	}
 
