@@ -772,21 +772,21 @@ Ping类不包含任何信息，只是用类型来表示ping协议。
 
 #### 解析器（IParser）和转换器（ITranslator）
 
-有了Protocol Object，引发了另外的问题，就是如何处理XML文档-Protocol Object之间的转换。
+有了Protocol Object，引发了另外的问题，就是如何处理XMPP协议文档-Protocol Object之间的转换。
 
-当我们收到网络上的XML协议文档，需要将其内容转换成一个Protocol Object实例。对应的，当我们发送一个Protocol Object时，需要将Protocol Object包含的协议信息，转换成对应的XML文档，再发送到网络上去。
+当我们收到网络上的XML协议文档，需要将其内容转换成一个Protocol Object实例。对应的，当我们发送一个Protocol Object时，需要将Protocol Object包含的协议信息，转换成对应的XMPP协议文档，再发送到网络上去。
 
-Chalk用IParser和ITranslator来处理Protocol Object-XML文档之间的转换。IParser负责将一个XML文档转换成Protocol Object实例。ITranslator负责将一个Protocol Object实例翻译成对应的XML文档。
+Chalk用IParser和ITranslator来处理Protocol Object-XMPP协议文档之间的转换。IParser负责将一个XMPP协议文档转换成Protocol Object实例。ITranslator负责将一个Protocol Object实例翻译成对应的XMPP协议文档。
 
-为了简化这些转换逻辑，Chalk使用Basalt项目提供的一个XMPP OXM(Protocol Object-XML Document Mapping)框架。在大部分情况下，我们并不需要为对象和XML文档之间的转换，编写逻辑代码。我们只需要选择系统内置的IParser和ITranslator实现。
+为了简化这些转换逻辑，Chalk使用Basalt项目提供的一个OXM(Protocol Object-XMPP Document Mapping)框架。在大部分情况下，我们并不需要为对象和XMPP协议文档之间的转换，编写逻辑代码。我们只需要选择系统内置的IParser和ITranslator实现。
 
 因为Ping对象结构非常简单，我们可以选择使用SimpleObjectParser和SimpleObjectTranslator来处理对象和XML文档之间的转换。
 
->Basalt是一个XMPP协议库，定义了基础的XMPP协议对象，并提供一个简单易用的OXM(Protocol Object-XML Document Mapping)框架。
+>Basalt是一个XMPP协议库，定义了基础的XMPP协议对象，并提供一个简单易用的OXM(Protocol Object-XMPP Document Mapping)框架。
 
->最常用的IParser和ITranslator，是NamingConventionParser和NamingConventionTranslator，它们采用命名约定的方法，将Protocol Object的Field和XML文档的Element做对应的拷贝。
+>最常用的IParser和ITranslator，是NamingConventionParser和NamingConventionTranslator，它们采用命名约定的方法，将Protocol Object的Field和XMPP协议文档中的Element做对应的拷贝。
 
->关于Basalt OXM(Protocol Object-XML Document Mapping)框架的更多信息，请参考Basalt项目相关文档。
+>关于Basalt OXM(Protocol Object-XMPP Document Mapping)框架的更多信息，请参考Basalt项目相关文档。
 
 #### Api
 在理想的情况下，我们将Chalk的开发者分为两类：
