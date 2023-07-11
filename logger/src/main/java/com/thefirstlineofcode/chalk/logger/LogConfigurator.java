@@ -19,8 +19,24 @@ public class LogConfigurator {
 		DEBUG,
 		TRACE
 	}
-
-	public void configure(String appName, LogLevel logLevel) {
+	
+	private static LogConfigurator instance;
+	
+	private LogConfigurator() {}
+	
+	public static boolean isConfigured() {
+		return instance != null;
+	}
+	
+	public static void configure(String appName, LogLevel logLevel) {
+		if (instance != null)
+			return;
+		
+		instance = new LogConfigurator();
+		instance.doConfigure(appName, logLevel);
+	}
+	
+	protected void doConfigure(String appName, LogLevel logLevel) {
 		System.setProperty(PROPERTY_KEY_DATA_DIR, System.getProperty("user.home"));
 		
 		if (appName == null || appName.isEmpty()) {

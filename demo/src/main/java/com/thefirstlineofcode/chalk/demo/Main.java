@@ -45,7 +45,7 @@ public class Main {
 			return;
 		}
 		
-		new LogConfigurator().configure(APP_NAME_CHALK_DEMO, config.logLevel);
+		LogConfigurator.configure(APP_NAME_CHALK_DEMO, config.logLevel);
 		
 		createAccounts(config);
 		
