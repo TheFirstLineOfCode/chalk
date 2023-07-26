@@ -203,7 +203,7 @@ public class SyncOperationTemplate<K extends Stanza, V> {
 		}
 
 		@Override
-		public void send(K stanza, int timeout) {
+		public void send(K stanza, long timeout) {
 			executor.resetTimeout(timeout);
 			chatServices.getStream().send(stanza);
 		}

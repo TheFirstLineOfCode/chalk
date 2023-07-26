@@ -52,14 +52,14 @@ public class LogConfigurator {
 		
 		if (logLevel != null) {			
 			if (LogLevel.DEBUG.equals(logLevel)) {
-				configureLog(lc, "logback_debug.xml");
+				configureLog(lc, "log_configuration_debug.xml");
 			} else if (LogLevel.TRACE.equals(logLevel)) {
-				configureLog(lc, "logback_trace.xml");
+				configureLog(lc, "log_configuration_trace.xml");
 			} else {
-				configureLog(lc, "logback.xml");
+				configureLog(lc, "log_configuration.xml");
 			}
 		} else {
-			configureLog(lc, "logback.xml");
+			configureLog(lc, "log_configuration.xml");
 		}
 	}
 	

@@ -60,7 +60,7 @@ public class ChatServices implements IChatServices, IErrorListener, IStanzaListe
 	
 	private IChatClient chatClient;
 	
-	private int defaultTaskTimeout;
+	private long defaultTaskTimeout;
 	
 	public ChatServices(IChatClient chatClient) {
 		this.chatClient = chatClient;
@@ -472,7 +472,7 @@ public class ChatServices implements IChatServices, IErrorListener, IStanzaListe
 		}
 
 		@Override
-		public void send(T stanza, int timeout) {
+		public void send(T stanza, long timeout) {
 			if (chatClient.getState() != State.CONNECTED)
 				return;
 			
@@ -483,7 +483,7 @@ public class ChatServices implements IChatServices, IErrorListener, IStanzaListe
 			stream.send(stanza);
 		}
 		
-		private <V extends Stanza> TimeoutTask<V> createTimeoutTask(V stanza, int timeout, ITask<V> task) {
+		private <V extends Stanza> TimeoutTask<V> createTimeoutTask(V stanza, long timeout, ITask<V> task) {
 			return new TimeoutTask<>(stanza.getId(), stanza, (System.currentTimeMillis() + timeout), task);
 		}
 		
@@ -612,7 +612,7 @@ public class ChatServices implements IChatServices, IErrorListener, IStanzaListe
 				}
 
 				@Override
-				public void send(final Z stanza, int timeout) {
+				public void send(final Z stanza, long timeout) {
 					new Timer().schedule(new TimerTask() {
 
 						@Override
@@ -652,12 +652,12 @@ public class ChatServices implements IChatServices, IErrorListener, IStanzaListe
 		}
 
 		@Override
-		public void setDefaultTimeout(int timeout) {
+		public void setDefaultTimeout(long timeout) {
 			ChatServices.this.defaultTaskTimeout = timeout;
 		}
 
 		@Override
-		public int getDefaultTimeout() {
+		public long getDefaultTimeout() {
 			return ChatServices.this.defaultTaskTimeout;
 		}
 		

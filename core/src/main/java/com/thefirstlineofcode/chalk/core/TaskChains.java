@@ -44,7 +44,7 @@ public class TaskChains implements ITask<Stanza> {
 		}
 
 		@Override
-		public void send(T stanza, int timeout) {
+		public void send(T stanza, long timeout) {
 			real.send(stanza, timeout);
 		}
 		
