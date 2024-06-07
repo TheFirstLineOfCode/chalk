@@ -13,8 +13,7 @@ public class ConnectionException extends Exception {
 		TLS_NOT_SUPPORTED,
 		TLS_FAILURE,
 		READ_RESPONSE_TIMEOUT,
-		CONNECTION_CLOSED,
-		TIMEOUT
+		CONNECTION_CLOSED
 	}
 	
 	private ConnectionException.Type type;

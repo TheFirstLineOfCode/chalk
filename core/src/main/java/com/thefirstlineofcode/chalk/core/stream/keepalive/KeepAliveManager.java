@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.thefirstlineofcode.basalt.xmpp.Constants;
 import com.thefirstlineofcode.basalt.xmpp.core.JabberId;
 import com.thefirstlineofcode.chalk.core.stream.IStream;
+import com.thefirstlineofcode.chalk.core.stream.Stream;
 import com.thefirstlineofcode.chalk.core.stream.StreamConfig;
 import com.thefirstlineofcode.chalk.network.ConnectionException;
 import com.thefirstlineofcode.chalk.network.IConnectionListener;
@@ -18,9 +19,6 @@ public class KeepAliveManager implements IKeepAliveManager, IConnectionListener 
 	private static final Logger logger = LoggerFactory.getLogger(KeepAliveManager.class);
 	
 	public static final byte[] BYTES_OF_HEART_BEAT_CHAR =  getBytesOfHeartBeatChar();
-	
-	protected static final String XML_CLOSE_STREAM = "</stream:stream>";
-	protected static final byte[] BINARY_CLOSE_STREAM = new byte[] {-1, -4, -1};
 	
 	protected KeepAliveConfig config;
 	protected IStream stream;
@@ -89,7 +87,8 @@ public class KeepAliveManager implements IKeepAliveManager, IConnectionListener 
 			new Thread() {
 				@Override
 				public void run() {
-					stream.close(true);
+					stream.close(false);
+					((Stream)stream).exceptionOccurred(new ConnectionException(ConnectionException.Type.CONNECTION_CLOSED));
 				}
 			}.start();
 		}
